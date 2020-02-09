@@ -10,4 +10,4 @@ Below are the algorithms that have been implemented or will be implemented in th
 | ---------- | ---------- | ------------ | ---------- | ---------------------- | -------------- |
 | Quicksort  | `n log(n)` | `n log(n)`   | `n^2     ` | `log(n)`               | Not yet        |
 | Mergesort  | `n log(n)` | `n log(n)`   | `n log(n)` | `n     `               | Not yet        |
-| Bubblesort | `n       ` | `n^2     `   | `n^2     ` | `1     `               | Not yet        |
+| Bubblesort | `n       ` | `n^2     `   | `n^2     ` | `1     `               | ✔ |
