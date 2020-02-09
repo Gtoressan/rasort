@@ -26,7 +26,7 @@ pub fn print_comparisons(count: u32) {
     println!("Comparisons count: {}", count);
 }
 
-pub fn print_elapsed_time(time: u32) {
+pub fn print_elapsed_time(time: u128) {
     println!("Time in milliseconds: {}", time);
 }
 
