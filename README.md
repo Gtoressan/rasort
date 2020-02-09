@@ -9,5 +9,5 @@ Below are the algorithms that have been implemented or will be implemented in th
 | Algorithm  | Best Time  | Average Time | Worst Time | Worst Space Complexity | Is Implemented |
 | ---------- | ---------- | ------------ | ---------- | ---------------------- | -------------- |
 | Quicksort  | `n log(n)` | `n log(n)`   | `n^2     ` | `log(n)`               | Not yet        |
-| Mergesort  | `n log(n)` | `n log(n)`   | `n log(n)` | `n     `               | Not yet        |
+| Mergesort  | `n log(n)` | `n log(n)`   | `n log(n)` | `n     `               | ✔ |
 | Bubblesort | `n       ` | `n^2     `   | `n^2     ` | `1     `               | ✔ |
