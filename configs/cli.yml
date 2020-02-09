@@ -1,0 +1,45 @@
+name: rasort
+version: "0.1.0"
+author: Arsanukaev Adam <gtoressan@gmail.com>
+about: Visualizes the process of sorting vectors
+args:
+  - file:
+      long: file
+      index: 1
+      value_name: TEXT_FILE
+      required: true
+      help: Takes a path to file with vector
+  - algorithm-name:
+      long: algo
+      index: 2
+      value_name: ALGORITHM_NAME
+      required: true
+      help: Takes an algorithm name to sort vector
+  - unsorted-vector:
+      short: u
+      long: unsv
+      value_name: COUNT_OF_COLUMNS
+      takes_value: true
+      help: Prints unsorted vector as-is in input file
+  - sorted-vector:
+      short: s
+      long: srtv
+      value_name: COUNT_OF_COLUMNS
+      takes_value: true
+      help: Pritns sorted vector
+  - comparisons:
+      short: c
+      long: comp
+      help: Prints the count of comparisons
+  - memory-accesses:
+      short: m
+      long: memac
+      help: Prints the count of memory acesses
+  - time:
+      short: t
+      long: time
+      help: Prints the elapsed time
+  - vector-len:
+      short: l
+      long: vlen
+      help: Pritns vector length
