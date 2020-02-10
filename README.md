@@ -1,4 +1,4 @@
-# Rastomatic
+# Rasort
 This repository is designed to implement various sorting algorithms in the Rust programming language for educational purposes.
 
 ## Array Sorting Algorithms
