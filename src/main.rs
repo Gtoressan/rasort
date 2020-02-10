@@ -107,6 +107,9 @@ fn main() {
         if TIME {
             coututil::print_elapsed_time(end.duration_since(start).as_millis());
         }
+        if VECTOR_LEN {
+            coututil::print_vector_len(&vector);
+        }
         if SORTED_VECTOR {
             coututil::print_vector(&vector, SORTED_VECTOR_COLUMNS);
         }

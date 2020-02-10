@@ -22,4 +22,4 @@ Now you can use console to interact with program. Below specified the list of co
 | comparisons     | cmop      | c          | -           | Optional   | Not yet |
 | memory-acsesses | memac     | m          | -           | Optional   | Not yet |
 | time            | time      | t          | -           | Optional   | ✔ |
-| vector-len      | vlen      | l          | -           | Optional   | Not yet |
+| vector-len      | vlen      | l          | -           | Optional   | ✔ |
