@@ -1,11 +1,11 @@
-mod cinutil;
-mod coututil;
-mod args;
-
 #[path = "./algos/bubblesort.rs"]
 mod bubblesort;
 #[path = "./algos/mergesort.rs"]
 mod mergesort;
+
+mod args;
+mod cinutil;
+mod coututil;
 
 #[macro_use]
 extern crate clap;
@@ -19,71 +19,75 @@ fn main() {
     let matches = clap::App::from_yaml(yaml)
         .get_matches();
 
-    // Requested arguments.
+    // Required arguments.
     let file = matches.value_of("file").unwrap();
     let algo = matches.value_of("algorithm-name").unwrap();
 
-	let config = args::Config {
-        // Optional flags.
-        UNSORTED_VECTOR: matches.is_present("unsorted-vector"),
-        UNSORTED_VECTOR_COLUMNS: match matches.value_of("unsorted-vector") {
+    // Optional arguments.
+    let state = args::State {
+        print_comparisons: matches.is_present("comparisons"),
+        print_elapsed_time: matches.is_present("time"),
+        print_memory_accesses: matches.is_present("memory-accesses"),
+        print_sorted_vector: matches.is_present("sorted-vector"),
+        print_unsorted_vector: matches.is_present("unsorted-vector"),
+        print_vector_length: matches.is_present("vector-len"),
+        sorted_vector_columns: match matches.value_of("sorted-vector") {
             Some(value) => {
                 match value.parse() {
-                    Ok(columns) => columns,
+                    Ok(number) => number,
                     Err(_) => {
-                        coututil::print_err(format!("invalid columns count"));
+                        coututil::print_err(format!("invalid input value"));
                         process::exit(1);
                     }
                 }
             },
             None => 0
         },
-        SORTED_VECTOR: matches.is_present("sorted-vector"),
-        SORTED_VECTOR_COLUMNS: match matches.value_of("sorted-vector") {
+        unsorted_vector_columns: match matches.value_of("unsorted-vector") {
             Some(value) => {
                 match value.parse() {
-                    Ok(columns) => columns,
+                    Ok(number) => number,
                     Err(_) => {
-                        coututil::print_err(format!("invalid columns count"));
+                        coututil::print_err(format!("invalid input value"));
                         process::exit(1);
                     }
                 }
             },
             None => 0
         },
-        COMPARISONS: matches.is_present("comparisons"),
-        MEMORY_ACCESSES: matches.is_present("memory-accesses"),
-        TIME: matches.is_present("time"),
-        VECTOR_LEN: matches.is_present("vector-len"),
     };
 
-    let mut vector = match cinutil::get_vec_from(&file) {
-        Ok(vector) => {
-			if config.UNSORTED_VECTOR {
-				coututil::print_vector(&vector, config.UNSORTED_VECTOR_COLUMNS);
-			}
+    let mut state_value = args::StateValue {
+        comparisons: 0,
+        memory_accesses: 0,
+        elapsed_time: 0,
+        vector: match cinutil::get_vec_from(file) {
+            Ok(vector) => {
+                if state.print_unsorted_vector {
+                    coututil::print_vector(&vector, state.unsorted_vector_columns);
+                }
 
-            vector
-        },
-        Err(err) => {
-            coututil::print_err(err);
-            process::exit(1);
+                vector
+            }
+            Err(err) => {
+                coututil::print_err(format!("{}", err));
+                process::exit(1);
+            }
         }
     };
 
-    let start: time::Instant;
-    let end: time::Instant;
-
     match algo {
         "bubble" => {
-            start = time::Instant::now();
-            bubblesort::bubblesort(&mut vector);
-            end = time::Instant::now();
+            let start = time::Instant::now();
+            bubblesort::bubblesort(&mut state_value.vector);
+            state_value.elapsed_time = start.elapsed()
+                .as_millis();
         },
         "merge" => {
-            start = time::Instant::now();
-            vector = mergesort::mergesort(vector);
-            end = time::Instant::now();
+            let start = time::Instant::now();
+            state_value.vector = mergesort::mergesort(state_value.vector);
+            state_value.elapsed_time = start.elapsed()
+                .as_millis();
         },
         _ => {
             coututil::print_err(format!("provided algorithm name not recognized"));
@@ -91,13 +95,19 @@ fn main() {
         }
     }
 
-	if config.TIME {
-		coututil::print_elapsed_time(end.duration_since(start).as_millis());
-	}
-	if config.VECTOR_LEN {
-		coututil::print_vector_len(&vector);
-	}
-	if config.SORTED_VECTOR {
-		coututil::print_vector(&vector, config.SORTED_VECTOR_COLUMNS);
-	}
+    if state.print_comparisons {
+        coututil::print_comparisons(state_value.comparisons);
+    }
+    if state.print_elapsed_time {
+        coututil::print_elapsed_time(state_value.elapsed_time);
+    }
+    if state.print_memory_accesses {
+        coututil::print_memory_access(state_value.memory_accesses);
+    }
+    if state.print_vector_length {
+        coututil::print_vector_len(&state_value.vector);
+    }
+    if state.print_sorted_vector {
+        coututil::print_vector(&state_value.vector, state.sorted_vector_columns);
+    }
 }
