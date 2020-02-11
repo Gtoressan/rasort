@@ -20,7 +20,7 @@ Now you can use console to interact with program. Below specified the list of co
 | algorithm-name  | algo      | -          | String      | Required   | ✔ |
 | unsorted-vector | unsv      | u          | Number      | Optional   | ✔ |
 | sorted-vector   | srtv      | s          | Number      | Optional   | ✔ |
-| comparisons     | cmop      | c          | -           | Optional   | Not yet |
-| memory-acsesses | memac     | m          | -           | Optional   | Not yet |
+| comparisons     | cmop      | c          | -           | Optional   | ✔ |
+| memory-acsesses | memac     | m          | -           | Optional   | ✔ |
 | time            | time      | t          | -           | Optional   | ✔ |
 | vector-len      | vlen      | l          | -           | Optional   | ✔ |

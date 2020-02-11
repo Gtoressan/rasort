@@ -82,7 +82,7 @@ fn main() {
     match algo {
         "bubble" => {
             let start = time::Instant::now();
-            bubblesort::bubblesort(&mut state_value);
+            bubblesort::bubblesort(&mut vector, &mut state_value);
             state_value.elapsed_time = start.elapsed()
                 .as_millis();
         },
@@ -94,7 +94,7 @@ fn main() {
         },
         "counting" => {
             let start = time::Instant::now();
-            countingsort::countingsort(&mut vector);
+            countingsort::countingsort(&mut vector, &mut state_value);
             state_value.elapsed_time = start.elapsed()
                 .as_millis();
         }
