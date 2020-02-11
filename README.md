@@ -4,11 +4,12 @@ This repository is designed to implement various sorting algorithms in the Rust 
 ## Array Sorting Algorithms
 Below are the algorithms that have been implemented or will be implemented in this project. The list may change.
 
-| Algorithm  | Best Time  | Average Time | Worst Time | Worst Space Complexity | Is Implemented |
-| ---------- | ---------- | ------------ | ---------- | ---------------------- | -------------- |
-| Quicksort  | `n log(n)` | `n log(n)`   | `n^2     ` | `log(n)`               | Not yet        |
-| Mergesort  | `n log(n)` | `n log(n)`   | `n log(n)` | `n     `               | ✔ |
-| Bubblesort | `n       ` | `n^2     `   | `n^2     ` | `1     `               | ✔ |
+| Algorithm    | Best Time  | Average Time | Worst Time | Worst Space Complexity | Is Implemented |
+| ------------ | ---------- | ------------ | ---------- | ---------------------- | -------------- |
+| Quicksort    | `n log(n)` | `n log(n)`   | `n^2     ` | `log(n)`               | Not yet        |
+| Mergesort    | `n log(n)` | `n log(n)`   | `n log(n)` | `n     `               | ✔ |
+| Bubblesort   | `n       ` | `n^2     `   | `n^2     ` | `1     `               | ✔ |
+| Countingsort | `n + k   ` | `n + k   `   | `n + k   ` | `k     `               | ✔ |
 
 ## Console Interface
 Now you can use console to interact with program. Below specified the list of console features which have been implemented or will be implemented. The list may change.

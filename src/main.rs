@@ -1,5 +1,7 @@
 #[path = "./algos/bubblesort.rs"]
 mod bubblesort;
+#[path = "./algos/countingsort.rs"]
+mod countingsort;
 #[path = "./algos/mergesort.rs"]
 mod mergesort;
 
@@ -89,6 +91,12 @@ fn main() {
             state_value.elapsed_time = start.elapsed()
                 .as_millis();
         },
+        "counting" => {
+            let start = time::Instant::now();
+            countingsort::countingsort(&mut state_value.vector);
+            state_value.elapsed_time = start.elapsed()
+                .as_millis();
+        }
         _ => {
             coututil::print_err(format!("provided algorithm name not recognized"));
             process::exit(1)
