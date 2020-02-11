@@ -10,7 +10,6 @@ pub struct State {
 }
 
 pub struct StateValue {
-    pub vector: Vec<i32>,
     pub comparisons: u128,
     pub memory_accesses: u128,
 

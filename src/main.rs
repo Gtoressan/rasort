@@ -62,38 +62,39 @@ fn main() {
     let mut state_value = args::StateValue {
         comparisons: 0,
         memory_accesses: 0,
-        elapsed_time: 0,
-        vector: match cinutil::get_vec_from(file) {
-            Ok(vector) => {
-                if state.print_unsorted_vector {
-                    coututil::print_vector(&vector, state.unsorted_vector_columns);
-                }
+        elapsed_time: 0
+    };
 
-                vector
+    let mut vector = match cinutil::get_vec_from(file) {
+        Ok(vector) => {
+            if state.print_unsorted_vector {
+                coututil::print_vector(&vector, state.unsorted_vector_columns);
             }
-            Err(err) => {
-                coututil::print_err(format!("{}", err));
-                process::exit(1);
-            }
+
+            vector
+        }
+        Err(err) => {
+            coututil::print_err(format!("{}", err));
+            process::exit(1);
         }
     };
 
     match algo {
         "bubble" => {
             let start = time::Instant::now();
-            bubblesort::bubblesort(&mut state_value.vector);
+            bubblesort::bubblesort(&mut state_value);
             state_value.elapsed_time = start.elapsed()
                 .as_millis();
         },
         "merge" => {
             let start = time::Instant::now();
-            state_value.vector = mergesort::mergesort(state_value.vector);
+            vector = mergesort::mergesort(vector, &mut state_value);
             state_value.elapsed_time = start.elapsed()
                 .as_millis();
         },
         "counting" => {
             let start = time::Instant::now();
-            countingsort::countingsort(&mut state_value.vector);
+            countingsort::countingsort(&mut vector);
             state_value.elapsed_time = start.elapsed()
                 .as_millis();
         }
@@ -113,9 +114,9 @@ fn main() {
         coututil::print_memory_access(state_value.memory_accesses);
     }
     if state.print_vector_length {
-        coututil::print_vector_len(&state_value.vector);
+        coututil::print_vector_len(&vector);
     }
     if state.print_sorted_vector {
-        coututil::print_vector(&state_value.vector, state.sorted_vector_columns);
+        coututil::print_vector(&vector, state.sorted_vector_columns);
     }
 }
