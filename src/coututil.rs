@@ -1,17 +1,19 @@
 pub fn print_vector(vector: &Vec<i32>, columns: u128) {
-    let mut index = 0;
+    let mut current_column = 0;
+    let mut printing_flag = false;
 
-    for i in vector {
-        print!("{}\t", i);
-        index += 1;
+    for i in 0..vector.len() {
+        if current_column < columns {
+            print!("{}\t", vector[i]);
+            current_column += 1;
+            printing_flag = true;
+        }
 
-        if index >= columns {
+        if printing_flag && (current_column == columns || i + 1 >= vector.len()) {
+            current_column = 0;
             println!();
-            index = 0;
         }
     }
-
-    println!();
 }
 
 pub fn print_vector_len(vector: &Vec<i32>) {
